@@ -1,1 +1,338 @@
-Digital Twin for 5G AI-RAN: Sim-to-Real Gap Measurement and Optimization
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="DTPO: Digital Twin for 5G AI-RAN">
+  <meta name="description" content="DTPO measures and optimizes the sim-to-real gap in a live 5G O-RAN digital twin.">
+  <meta name="keywords" content="DTPO, digital twin, AI-RAN, O-RAN, 5G, sim-to-real, Bayesian optimization">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2457d6">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DTPO">
+  <meta property="og:title" content="Digital Twin for 5G AI-RAN: Sim-to-Real Gap Measurement and Optimization">
+  <meta property="og:description" content="A systematic measurement and optimization study of the sim-to-real gap in a live 5G O-RAN digital twin.">
+  <meta property="og:url" content="https://dtpo-source.github.io/DTPO/">
+  <title>DTPO: Digital Twin for 5G AI-RAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2457d6;
+      --blue-dark: #173da3;
+      --ink: #182235;
+      --muted: #64748b;
+      --line: #dfe6f0;
+      --surface: #f7f9fc;
+      --white: #ffffff;
+      --radius: 18px;
+      --shadow: 0 16px 40px rgba(28, 48, 84, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    .paper-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 92px 0 58px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(36, 87, 214, 0.12), transparent 32%),
+        radial-gradient(circle at 88% 18%, rgba(14, 165, 233, 0.10), transparent 28%),
+        linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+    }
+
+    .paper-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin: 0 auto 28px;
+      font-size: clamp(2.35rem, 5.2vw, 4.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .button-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 22px;
+      color: #fff;
+      background: var(--ink);
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 7px 18px rgba(24, 34, 53, 0.18);
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover, .button:focus-visible {
+      background: var(--blue);
+      box-shadow: 0 10px 22px rgba(36, 87, 214, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .github-mark { width: 19px; height: 19px; fill: currentColor; }
+    section { padding: 78px 0; }
+    section.is-light { background: var(--surface); border-block: 1px solid var(--line); }
+
+    .section-title {
+      margin: 0 0 34px;
+      text-align: center;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 58px;
+      height: 4px;
+      margin: 16px auto 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--blue), #21a3db);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .media-card, .result-card {
+      padding: 14px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .media-placeholder, .image-placeholder {
+      width: 100%;
+      background: #fbfcfe;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+    }
+
+    .media-placeholder { aspect-ratio: 16 / 9; }
+    .image-placeholder { aspect-ratio: 16 / 10; }
+
+    .media-caption {
+      min-height: 30px;
+      margin: 13px 4px 2px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .abstract {
+      max-width: 870px;
+      margin: 0 auto;
+      color: #475569;
+      font-size: 1.08rem;
+      text-align: justify;
+    }
+
+    .results-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(310px, 48%);
+      gap: 22px;
+      overflow-x: auto;
+      padding: 8px 6px 24px;
+      scroll-snap-type: x mandatory;
+      scrollbar-color: var(--blue) #e8edf5;
+    }
+
+    .result-card { scroll-snap-align: start; }
+
+    .result-caption {
+      min-height: 30px;
+      margin: 13px 4px 2px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .results-hint {
+      margin: 14px 0 0;
+      color: #94a3b8;
+      text-align: center;
+      font-size: 0.84rem;
+    }
+
+    footer {
+      padding: 34px 20px;
+      color: var(--muted);
+      background: #f7f9fc;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .scroll-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 48px;
+      height: 48px;
+      color: white;
+      background: var(--blue);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px rgba(36, 87, 214, 0.28);
+      cursor: pointer;
+      font: inherit;
+      font-size: 1.25rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .scroll-top:focus-visible, .button:focus-visible { outline: 3px solid rgba(36, 87, 214, 0.3); outline-offset: 3px; }
+
+    @media (max-width: 760px) {
+      .paper-hero { padding: 68px 0 46px; }
+      section { padding: 58px 0; }
+      .container { width: min(100% - 28px, 1120px); }
+      .media-grid { grid-template-columns: 1fr; }
+      .results-track { grid-auto-columns: 86%; }
+      .abstract { font-size: 1rem; text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="paper-hero">
+      <div class="container">
+        <p class="eyebrow">DTPO · 5G O-RAN Digital Twin</p>
+        <h1>Digital Twin for 5G AI-RAN: Sim-to-Real Gap Measurement and Optimization</h1>
+        <p class="hero-subtitle">Measuring cellular digital-twin fidelity and optimizing the gap between simulation and a live 5G O-RAN deployment.</p>
+        <div class="button-row">
+          <a class="button" href="https://github.com/DTPO-source/DTPO" target="_blank" rel="noopener noreferrer">
+            <svg class="github-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23.1c.58.1.79-.25.79-.56v-2.2c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.74-1.56-2.57-.3-5.27-1.29-5.27-5.7 0-1.26.45-2.3 1.2-3.1-.12-.3-.52-1.47.11-3.06 0 0 .98-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.75.8 1.2 1.84 1.2 3.1 0 4.43-2.7 5.4-5.28 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.2.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg>
+            <span>Code</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section aria-labelledby="demos-title">
+      <div class="container">
+        <h2 class="section-title" id="demos-title">Demo Videos</h2>
+        <div class="media-grid">
+          <article class="media-card">
+            <!-- Replace this empty block with the first DTPO video. -->
+            <div class="media-placeholder" role="img" aria-label="Reserved space for the DTPO platform demo video"></div>
+            <p class="media-caption">DTPO Platform Demo</p>
+          </article>
+          <article class="media-card">
+            <!-- Replace this empty block with the second DTPO video. -->
+            <div class="media-placeholder" role="img" aria-label="Reserved space for the DTPO evaluation demo video"></div>
+            <p class="media-caption">DTPO Evaluation Demo</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="is-light" aria-labelledby="abstract-title">
+      <div class="container">
+        <h2 class="section-title" id="abstract-title">Abstract</h2>
+        <p class="abstract">Digital twins are key enablers for AI-native radio access networks (AI-RANs), supporting data generation, policy validation, and what-if analysis without disrupting operational networks. However, their utility depends on how faithfully they reproduce cellular behavior, while wireless digital-twin fidelity remains poorly understood. We present, to our knowledge, the first systematic study of the sim-to-real gap in a cellular digital twin. We construct a twin of a live 5G O-RAN deployment by coupling a map-based ray-tracing channel simulator with a full-stack O-RAN platform and quantify channel- and network-level discrepancies using real-world measurements. We then develop Digital-Twin Parameter Optimization (DTPO), a Bayesian optimization framework that calibrates environmental and radio parameters. Experiments show that the calibrated twin cannot reproduce instantaneous channel realizations accurately but matches network-level behavior, with mean gaps of 2.3%, 5.1%, and 5.5% for per-user throughput, block error rate, and channel quality indicator. Moreover, AI models and policies trained in the calibrated twin transfer to the real deployment without fine-tuning; a slicing policy achieves 89.1% eMBB satisfaction, 95.3% mMTC success, and a 3.1% URLLC delay-violation rate. These findings show that cellular digital-twin fidelity should be evaluated by network-level behavior rather than exact channel realizations.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="results-title">
+      <div class="container">
+        <h2 class="section-title" id="results-title">System and Results</h2>
+        <div class="results-track" aria-label="Reserved image gallery">
+          <article class="result-card">
+            <!-- Replace with the DTPO system overview image. -->
+            <div class="image-placeholder" role="img" aria-label="Reserved space for the DTPO system overview"></div>
+            <p class="result-caption">DTPO System Overview</p>
+          </article>
+          <article class="result-card">
+            <!-- Replace with the 5G O-RAN digital-twin platform image. -->
+            <div class="image-placeholder" role="img" aria-label="Reserved space for the 5G O-RAN digital-twin platform"></div>
+            <p class="result-caption">5G O-RAN Digital-Twin Platform</p>
+          </article>
+          <article class="result-card">
+            <!-- Replace with the sim-to-real gap measurement image. -->
+            <div class="image-placeholder" role="img" aria-label="Reserved space for sim-to-real gap measurements"></div>
+            <p class="result-caption">Sim-to-Real Gap Measurement</p>
+          </article>
+          <article class="result-card">
+            <!-- Replace with the DTPO optimization results image. -->
+            <div class="image-placeholder" role="img" aria-label="Reserved space for DTPO optimization results"></div>
+            <p class="result-caption">DTPO Optimization Results</p>
+          </article>
+        </div>
+        <p class="results-hint">Scroll horizontally to view all reserved figure positions.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>DTPO · Digital Twin for 5G AI-RAN</span>
+  </footer>
+
+  <button class="scroll-top" type="button" aria-label="Scroll to top" title="Scroll to top">&#8593;</button>
+  <script>
+    const scrollButton = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', () => {
+      scrollButton.classList.toggle('visible', window.scrollY > 420);
+    }, { passive: true });
+    scrollButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
