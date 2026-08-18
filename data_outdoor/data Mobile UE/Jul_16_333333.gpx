@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:geotracker="http://ilyabogdanovich.com/gpx/extensions/geotracker" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="Recorded in Geo Tracker for Android from Ilya Bogdanovich">
+  <metadata>
+    <name>Jul 16 333333</name>
+    <author>
+      <name>Recorded in Geo Tracker for Android from Ilya Bogdanovich</name>
+      <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    </author>
+    <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    <time>2026-07-16T22:18:46Z</time>
+  </metadata>
+  <wpt lat="42.72447" lon="-84.48001333">
+    <ele>239.6</ele>
+    <time>2026-07-16T22:23:48Z</time>
+    <name>Stop for ~2 min</name>
+    <desc>Elevation: 786 ft
+Time from start: 00:05:01
+Distance from start: 105 ft</desc>
+    <extensions>
+      <geotracker:meta emoji="⏱️" />
+    </extensions>
+  </wpt>
+  <trk>
+    <name>Jul 16 333333</name>
+    <src>Recorded in Geo Tracker for Android from Ilya Bogdanovich</src>
+    <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    <extensions>
+      <geotracker:meta>
+        <geotracker:length>55.75</geotracker:length>
+        <geotracker:duration>443350</geotracker:duration>
+        <geotracker:creationtime>2026-07-16T22:18:46Z</geotracker:creationtime>
+        <geotracker:activity>0</geotracker:activity>
+      </geotracker:meta>
+    </extensions>
+    <trkseg>
+      <trkpt lat="42.72406" lon="-84.48000333">
+        <ele>229.4</ele>
+        <time>2026-07-16T22:19:16Z</time>
+        <extensions>
+          <geotracker:meta c="0.01" s="0.46" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72418333" lon="-84.47999667">
+        <ele>232.2</ele>
+        <time>2026-07-16T22:22:05Z</time>
+        <extensions>
+          <geotracker:meta c="6.15" s="0.23" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72427333" lon="-84.48000333">
+        <ele>233.8</ele>
+        <time>2026-07-16T22:22:14Z</time>
+        <extensions>
+          <geotracker:meta c="0.22" s="0.84" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72437333" lon="-84.48001">
+        <ele>236</ele>
+        <time>2026-07-16T22:22:44Z</time>
+        <extensions>
+          <geotracker:meta c="6.17" s="0.98" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72447" lon="-84.48001333">
+        <ele>239.6</ele>
+        <time>2026-07-16T22:23:48Z</time>
+        <extensions>
+          <geotracker:meta c="0.18" s="0.57" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72457167" lon="-84.479925">
+        <ele>238.7</ele>
+        <time>2026-07-16T22:24:50Z</time>
+        <extensions>
+          <geotracker:meta c="0.08" s="0.68" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="42.72465667" lon="-84.47987">
+        <ele>242</ele>
+        <time>2026-07-16T22:25:07Z</time>
+        <extensions>
+          <geotracker:meta c="0.13" s="0.39" />
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
