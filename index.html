@@ -148,11 +148,21 @@
       box-shadow: var(--shadow);
     }
 
-    .media-placeholder, .image-placeholder {
+    .demo-video, .media-placeholder, .image-placeholder {
       width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .demo-video {
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      object-fit: contain;
+    }
+
+    .media-placeholder, .image-placeholder {
       background: #fbfcfe;
       border: 1px dashed #cbd5e1;
-      border-radius: 12px;
     }
 
     .media-placeholder { aspect-ratio: 16 / 9; }
@@ -272,9 +282,11 @@
         <h2 class="section-title" id="demos-title">Demo Videos</h2>
         <div class="media-grid">
           <article class="media-card">
-            <!-- Replace this empty block with the first DTPO video. -->
-            <div class="media-placeholder" role="img" aria-label="Reserved space for the DTPO platform demo video"></div>
-            <p class="media-caption">DTPO Platform Demo</p>
+            <video class="demo-video" controls playsinline preload="metadata" aria-label="Real-world 100 MHz channel measurement demo">
+              <source src="assets/videos/0817-web.mp4" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
+            <p class="media-caption">Real-world channel measurements at 100 MHz bandwidth, showing the physical environment, multipath delay, magnitude, and phase.</p>
           </article>
           <article class="media-card">
             <!-- Replace this empty block with the second DTPO video. -->
