@@ -1,0 +1,45 @@
+# Stationary EBSTR Sim-to-Real calibration.  Run prepare_real_metrics first.
+project_root: .
+bandwidth_mhz: 20
+output_dir: data/bo_calibration/EBSTR/20mhz/stationary
+measurements:
+  real_metrics_csv: data/calibration/bo_inputs/20mhz_stationary/real_metrics.csv
+baseline_metrics_csv: data/calibration/bo_inputs/20mhz_stationary/aodt_metrics.csv
+optimizer:
+  algorithm: two_order_constrained_noisy_expected_improvement_matern52_ard
+  iterations: 12
+  initial_design: 8
+  first_order_iterations: 12
+  first_order_tolerance: 1.10
+  seed: 20260718
+  candidate_count: 4096
+objective:
+  weights:
+    rsrp_db: 1.0
+    ul_throughput_mbps: 0.1
+    dl_throughput_mbps: 0.1
+    cqi: 0.4
+    sinr_db: 0.5
+    ul_bler_pct: 0.05
+    dl_bler_pct: 0.05
+evaluation:
+  command: >-
+    BO_AODT_GPX_FILE='data/GPX/Jul_19_213850.gpx'
+    BO_AODT_TIMESTEPS=9 BO_AODT_BANDWIDTH_MHZ=20 BO_AODT_FFT_SIZE=512
+    BO_TRAFFIC_PROFILE_CSV='data/processed/20mhz/stationary/traffic_demand.csv' BO_CIR_INTERVAL=3
+    GNB_CONFIG_FILE='calibration/radio/gnb_oai_20mhz.yaml' UE_CONFIG_FILE='calibration/radio/oaiue_20mhz.conf'
+    BRIDGE_SAMPLE_RATE_HZ=23040000
+    bash bo_calibration/run_ebstr_experiment.sh
+  simulated_metrics_file: simulation_metrics.csv
+  timeout_seconds: 7200
+parameters:
+  - {name: building_material_1_a, lower_bound: 1.0, upper_bound: 10.0, initial_value: 5.239007472991943, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/building_materials_calibrated.json, path: calibrated_material_1.a}}
+  - {name: building_material_1_c, lower_bound: 0.0, upper_bound: 0.5, initial_value: 0.12319553643465042, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/building_materials_calibrated.json, path: calibrated_material_1.c}}
+  - {name: building_material_1_scattering, lower_bound: 0.0, upper_bound: 1.0, initial_value: 0.065994493663311, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/building_materials_calibrated.json, path: calibrated_material_1.scattering_coeff}}
+  - {name: building_material_2_a, lower_bound: 1.0, upper_bound: 10.0, initial_value: 5.240110874176025, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/building_materials_calibrated.json, path: calibrated_material_2.a}}
+  - {name: building_material_2_scattering, lower_bound: 0.0, upper_bound: 1.0, initial_value: 0.6866355538368225, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/building_materials_calibrated.json, path: calibrated_material_2.scattering_coeff}}
+  - {name: vegetation_1_A, lower_bound: 0.1, upper_bound: 2.0, initial_value: 0.8887925148010254, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/vegetation_veg_materials_calibrated.json, path: bo_primary_vegetation.A}}
+  - {name: vegetation_1_B, lower_bound: 0.05, upper_bound: 1.0, initial_value: 0.31523388624191284, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/vegetation_veg_materials_calibrated.json, path: bo_primary_vegetation.B}}
+  - {name: vegetation_1_scattering, lower_bound: 0.0, upper_bound: 1.0, initial_value: 0.8672373294830322, target: {kind: json, source: data/calibration/EBSTR/calibrated_assets/vegetation_veg_materials_calibrated.json, path: bo_primary_vegetation.scattering_power_factor}}
+  - {name: ru_transmit_power_dbm, lower_bound: 20.0, upper_bound: 50.0, initial_value: 40.87192189948769, target: {kind: environment, name: BO_RU_TRANSMIT_POWER_DBM}}
+  - {name: bridge_noise_power_dbfs, lower_bound: -70.0, upper_bound: -25.0, initial_value: -45.0, target: {kind: environment, name: BRIDGE_NOISE_POWER_DBFS}}
