@@ -77,7 +77,7 @@
     h1 {
       max-width: 1000px;
       margin: 0 auto 28px;
-      font-size: clamp(2.35rem, 5.2vw, 4.25rem);
+      font-size: clamp(2.2rem, 4.6vw, 3.85rem);
       line-height: 1.08;
       letter-spacing: -0.045em;
     }
@@ -140,6 +140,10 @@
       gap: 24px;
     }
 
+    .demo-container {
+      width: min(1500px, calc(100% - 40px));
+    }
+
     .media-card, .result-card {
       padding: 14px;
       background: var(--white);
@@ -155,7 +159,7 @@
     }
 
     .demo-video {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 169 / 72;
       background: #0f172a;
       object-fit: contain;
     }
@@ -165,7 +169,7 @@
       border: 1px dashed #cbd5e1;
     }
 
-    .media-placeholder { aspect-ratio: 16 / 9; }
+    .media-placeholder { aspect-ratio: 169 / 72; }
     .image-placeholder { aspect-ratio: 16 / 10; }
 
     .media-caption {
@@ -278,7 +282,7 @@
     </header>
 
     <section aria-labelledby="demos-title">
-      <div class="container">
+      <div class="container demo-container">
         <h2 class="section-title" id="demos-title">Demo Videos</h2>
         <div class="media-grid">
           <article class="media-card">
