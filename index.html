@@ -183,13 +183,16 @@
       transition: var(--transition);
     }
     .carousel-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-    .image-placeholder {
+    .result-image, .image-placeholder {
       display: block;
       width: 100%;
+      border-radius: var(--border-radius);
+    }
+    .result-image { height: auto; }
+    .image-placeholder {
       aspect-ratio: 16 / 9;
       background: var(--background-secondary);
       border: 1px dashed #cbd5e1;
-      border-radius: var(--border-radius);
     }
     .carousel-caption {
       margin: 1rem 0 0;
@@ -323,7 +326,7 @@
             <button class="carousel-button previous" type="button" aria-label="Previous result">&#8249;</button>
             <div class="carousel-track">
               <article class="carousel-item">
-                <div class="image-placeholder" role="img" aria-label="Reserved space for the DTPO system overview"></div>
+                <img class="result-image" src="assets/images/digital_twin.png" alt="DTPO real 5G network and digital-twin system overview" loading="lazy">
                 <h2 class="carousel-caption">DTPO System Overview</h2>
               </article>
               <article class="carousel-item">
