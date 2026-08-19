@@ -107,7 +107,7 @@
       align-items: stretch;
     }
     .teaser-video-item { min-width: 0; }
-    .teaser-video, .teaser-video-placeholder {
+    .teaser-video {
       display: block;
       width: 100%;
       height: calc((100vw - 2.25rem) / 2 * 0.48);
@@ -183,17 +183,12 @@
       transition: var(--transition);
     }
     .carousel-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-    .result-image, .image-placeholder {
+    .result-image {
       display: block;
       width: 100%;
       border-radius: var(--border-radius);
     }
     .result-image { height: auto; }
-    .image-placeholder {
-      aspect-ratio: 16 / 9;
-      background: var(--background-secondary);
-      border: 1px dashed #cbd5e1;
-    }
     .carousel-caption {
       margin: 1rem 0 0;
       color: var(--text-secondary);
@@ -300,7 +295,10 @@
               <h2 class="teaser-video-title">Real-world 100 MHz Channel Measurements.</h2>
             </div>
             <div class="teaser-video-item">
-              <div class="teaser-video-placeholder" role="img" aria-label="Reserved space for the DTPO evaluation demo video"></div>
+              <video class="teaser-video" autoplay controls muted loop playsinline preload="metadata" aria-label="DTPO evaluation demo">
+                <source src="assets/videos/0819-web.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <h2 class="teaser-video-title">DTPO Evaluation Demo</h2>
             </div>
           </div>
@@ -332,14 +330,6 @@
               <article class="carousel-item">
                 <img class="result-image" src="assets/images/area.png" alt="DTPO outdoor experimental area with RU and UE locations" loading="lazy">
                 <h2 class="carousel-caption">DTPO Experimental Area</h2>
-              </article>
-              <article class="carousel-item">
-                <div class="image-placeholder" role="img" aria-label="Reserved space for sim-to-real gap measurements"></div>
-                <h2 class="carousel-caption">Sim-to-Real Gap Measurement</h2>
-              </article>
-              <article class="carousel-item">
-                <div class="image-placeholder" role="img" aria-label="Reserved space for DTPO optimization results"></div>
-                <h2 class="carousel-caption">DTPO Optimization Results</h2>
               </article>
             </div>
             <button class="carousel-button next" type="button" aria-label="Next result">&#8250;</button>
