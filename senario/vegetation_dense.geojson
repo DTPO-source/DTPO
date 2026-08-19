@@ -1,0 +1,581 @@
+{
+  "type": "FeatureCollection",
+  "name": "demo_visual_vegetation_dense",
+  "metadata": {
+    "visualization_only": true,
+    "tree_count": 38,
+    "aligned_with_em_vegetation": true
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480162,
+          42.724467,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 0,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480251,
+          42.724477,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 1,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480113,
+          42.724759,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 2,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479476,
+          42.723497,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 3,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479702,
+          42.72427,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 4,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480369,
+          42.724442,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 5,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480316,
+          42.724469,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 6,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480282,
+          42.724457,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 7,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480202,
+          42.724447,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 8,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480389,
+          42.7244,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 9,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480282,
+          42.7244,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 10,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480215,
+          42.724393,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 11,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480416,
+          42.724311,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 12,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480423,
+          42.724275,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 13,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.48044,
+          42.724199,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 14,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480141,
+          42.724728,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 15,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480118,
+          42.724688,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 16,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480057,
+          42.724708,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 17,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480047,
+          42.724654,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 18,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480137,
+          42.724589,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 19,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480152,
+          42.724548,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 20,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.48,
+          42.724747,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 21,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479931,
+          42.724634,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 22,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.47994,
+          42.72459,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 23,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480269,
+          42.72414,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 24,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480202,
+          42.723976,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 25,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.48029,
+          42.723938,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 26,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480215,
+          42.723897,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 27,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480186,
+          42.723878,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 28,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480067,
+          42.723815,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 29,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.480141,
+          42.723797,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 30,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479882,
+          42.724068,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 31,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479826,
+          42.724063,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 32,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479752,
+          42.724063,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 33,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479721,
+          42.724045,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 34,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479625,
+          42.723935,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 35,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.479833,
+          42.723792,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 36,
+        "prototype_prim": "StreetTree"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.48003,
+          42.723874,
+          230.27610645
+        ]
+      },
+      "properties": {
+        "index": 37,
+        "prototype_prim": "StreetTree"
+      }
+    }
+  ]
+}

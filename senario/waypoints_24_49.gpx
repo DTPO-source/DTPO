@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Codex transcription of GPS Tracks screenshots">
+  <metadata>
+    <name>demo UE trajectory: waypoints 24-49</name>
+    <desc>Waypoint 23 is reserved for the RU. Waypoints 32 and 35 were not visible in the supplied screenshots and are linearly interpolated between their neighboring waypoints.</desc>
+    <time>2026-07-29T17:58:38Z</time>
+  </metadata>
+  <trk>
+    <name>demo UE1 waypoints 24-49</name>
+    <trkseg>
+      <trkpt lat="42.723510" lon="-84.480090"><ele>207.5</ele><time>2026-07-29T17:58:38Z</time><name>Waypoint 24</name></trkpt>
+      <trkpt lat="42.723550" lon="-84.480090"><ele>207.5</ele><time>2026-07-29T18:00:47Z</time><name>Waypoint 25</name></trkpt>
+      <trkpt lat="42.723590" lon="-84.480100"><ele>207.5</ele><time>2026-07-29T18:01:04Z</time><name>Waypoint 26</name></trkpt>
+      <trkpt lat="42.723640" lon="-84.480090"><ele>207.5</ele><time>2026-07-29T18:01:23Z</time><name>Waypoint 27 (time interpolated)</name></trkpt>
+      <trkpt lat="42.723680" lon="-84.480080"><ele>207.5</ele><time>2026-07-29T18:01:42Z</time><name>Waypoint 28</name></trkpt>
+      <trkpt lat="42.723730" lon="-84.480080"><ele>207.5</ele><time>2026-07-29T18:03:03Z</time><name>Waypoint 29</name></trkpt>
+      <trkpt lat="42.723780" lon="-84.480050"><ele>207.5</ele><time>2026-07-29T18:03:53Z</time><name>Waypoint 30</name></trkpt>
+      <trkpt lat="42.723830" lon="-84.480020"><ele>207.5</ele><time>2026-07-29T18:06:02Z</time><name>Waypoint 31</name></trkpt>
+      <trkpt lat="42.723900" lon="-84.480005"><ele>207.5</ele><time>2026-07-29T18:07:17Z</time><name>Waypoint 32 (position and time interpolated)</name></trkpt>
+      <trkpt lat="42.723970" lon="-84.479990"><ele>207.5</ele><time>2026-07-29T18:08:32Z</time><name>Waypoint 33</name></trkpt>
+      <trkpt lat="42.724040" lon="-84.480000"><ele>207.5</ele><time>2026-07-29T18:08:52Z</time><name>Waypoint 34</name></trkpt>
+      <trkpt lat="42.724080" lon="-84.480000"><ele>207.5</ele><time>2026-07-29T18:09:28Z</time><name>Waypoint 35 (position and time interpolated)</name></trkpt>
+      <trkpt lat="42.724120" lon="-84.480000"><ele>207.5</ele><time>2026-07-29T18:10:04Z</time><name>Waypoint 36 (seconds inferred)</name></trkpt>
+      <trkpt lat="42.724160" lon="-84.480020"><ele>207.5</ele><time>2026-07-29T18:11:27Z</time><name>Waypoint 37</name></trkpt>
+      <trkpt lat="42.724180" lon="-84.480040"><ele>207.5</ele><time>2026-07-29T18:12:26Z</time><name>Waypoint 38</name></trkpt>
+      <trkpt lat="42.724200" lon="-84.480090"><ele>207.5</ele><time>2026-07-29T18:12:34Z</time><name>Waypoint 39</name></trkpt>
+      <trkpt lat="42.724270" lon="-84.480130"><ele>207.5</ele><time>2026-07-29T18:14:07Z</time><name>Waypoint 40</name></trkpt>
+      <trkpt lat="42.724320" lon="-84.480090"><ele>207.5</ele><time>2026-07-29T18:14:19Z</time><name>Waypoint 41</name></trkpt>
+      <trkpt lat="42.724320" lon="-84.480060"><ele>207.5</ele><time>2026-07-29T18:15:15Z</time><name>Waypoint 42</name></trkpt>
+      <trkpt lat="42.724340" lon="-84.480030"><ele>207.5</ele><time>2026-07-29T18:15:52Z</time><name>Waypoint 43 (seconds inferred)</name></trkpt>
+      <trkpt lat="42.724380" lon="-84.480010"><ele>207.5</ele><time>2026-07-29T18:16:30Z</time><name>Waypoint 44</name></trkpt>
+      <trkpt lat="42.724440" lon="-84.480010"><ele>207.5</ele><time>2026-07-29T18:17:44Z</time><name>Waypoint 45</name></trkpt>
+      <trkpt lat="42.724520" lon="-84.480030"><ele>207.5</ele><time>2026-07-29T18:19:38Z</time><name>Waypoint 46</name></trkpt>
+      <trkpt lat="42.724580" lon="-84.480020"><ele>207.5</ele><time>2026-07-29T18:21:03Z</time><name>Waypoint 47</name></trkpt>
+      <trkpt lat="42.724640" lon="-84.479960"><ele>207.5</ele><time>2026-07-29T18:21:40Z</time><name>Waypoint 48</name></trkpt>
+      <trkpt lat="42.724680" lon="-84.479970"><ele>207.5</ele><time>2026-07-29T18:22:03Z</time><name>Waypoint 49 (seconds inferred)</name></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
