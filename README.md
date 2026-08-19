@@ -17,15 +17,20 @@ optimization workflow.
 
 ```text
 .
-├── index.html                         # Project webpage
-├── assets/                           # Webpage figures and demo videos
-├── data_outdoor/                     # Outdoor CSI, gNB metrics, and GPX traces
-├── senario/                          # AODT scene and UE trajectory inputs
+├── index.html                              # Project webpage
+├── assets/
+├── data_outdoor/
+├── senario/
+│   ├── scenario.yaml                       # AODT simulation configuration
+│   ├── vegetation_dense.geojson            # Vegetation geometry
+│   ├── waypoints_24_49.gpx                 # Source UE waypoints
+│   └── ue_trajectory_1p5s.gpx              # Resampled UE trajectory
 └── source_code/
-    ├── DTPO.py                        # DTPO optimizer and fidelity objective
-    ├── ebstr_calibration_pipeline.py  # Measurement and asset preparation
-    ├── ebstr_bo_calibration.yml       # Example experiment configuration
-    └── run_ebstr_experiment.sh        # One end-to-end candidate evaluation
+    ├── DTPO.py                             # Optimizer and fidelity objective
+    ├── ebstr_calibration_pipeline.py       # Measurement/asset preparation
+    ├── ebstr_bo_calibration.yml            # Experiment configuration
+    ├── run_ebstr_experiment.sh             # Candidate evaluation runner
+    └── README.md                           # Source-code notes
 ```
 
 ### `source_code/`
@@ -37,11 +42,28 @@ and AODT assets from CSI, KPI, GPX, and scene data. The YAML file defines
 site-specific parameter bounds and optimizer settings, while the shell script
 runs one isolated AODT-to-O-RAN evaluation.
 
-### `data_outdoor/` and `senario/`
+### `data_outdoor/`
 
-`data_outdoor/` contains stationary and mobile CSI snapshots, gNB metrics, GPX
-traces, and the CSI collection script. `senario/` contains the AODT scenario,
-vegetation geometry, waypoints, and UE trajectory inputs used by the project.
+`data_outdoor/` contains CSI snapshots, gNB metrics, GPX traces, and the CSI
+collection script. The stationary and mobile folders pair radio observations
+with route data, while `data_UE/` provides an additional UE capture set for the
+real-data reference.
+
+### `senario/`
+
+The directory name follows the spelling currently used in the repository. Its
+files define the site and UE motion used for AODT evaluation:
+
+| File | Purpose |
+| --- | --- |
+| `scenario.yaml` | Configures database and Parquet export, GIS assets, DU/RU/UE placement, antenna panels, radio parameters, and the AODT simulation timeline. |
+| `vegetation_dense.geojson` | Provides 38 visualization tree locations aligned with the electromagnetic vegetation layout. |
+| `waypoints_24_49.gpx` | Stores the source UE waypoint sequence, including interpolated points where the original route record was incomplete. |
+| `ue_trajectory_1p5s.gpx` | Densifies the waypoint route at 1.5-second intervals for the AODT UE trajectory. |
+
+The paths inside `scenario.yaml` follow the target AODT deployment layout (for
+example, `demo_gis/demo/`). The files in this directory are the repository-side
+inputs that must be placed or mapped into that environment before simulation.
 
 ## DTPO Method
 
