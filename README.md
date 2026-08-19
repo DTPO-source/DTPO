@@ -2,63 +2,59 @@
 
 **Digital Twin for 5G AI-RAN: Sim-to-Real Gap Measurement and Optimization**
 
-[Project Page](https://dtpo-source.github.io/DTPO/)
+DTPO measures and reduces the sim-to-real gap between a live 5G O-RAN
+deployment and a digital twin that combines NVIDIA Aerial Omniverse Digital
+Twin (AODT) ray-tracing channels with a full-stack O-RAN system. Although exact
+instantaneous channel reconstruction remains difficult, the calibrated twin can
+closely reproduce network behavior and support the transfer of AI models and
+control policies to the real deployment.
 
-## Overview
+This repository contains the project webpage, outdoor measurements, AODT
+scenario inputs, and the reference implementation of the DTPO calibration and
+optimization workflow.
 
-DTPO studies and reduces the sim-to-real gap between a live 5G O-RAN deployment
-and its digital twin. The digital twin couples map-based ray-tracing channels
-from NVIDIA Aerial Omniverse Digital Twin (AODT) with a full-stack O-RAN system,
-allowing channel behavior and end-to-end network KPIs to be compared under
-aligned radio configurations and UE trajectories.
+## Repository Structure
 
-The project focuses on two questions:
+```text
+.
+├── index.html                         # Project webpage
+├── assets/                           # Webpage figures and demo videos
+├── data_outdoor/                     # Outdoor CSI, gNB metrics, and GPX traces
+├── senario/                          # AODT scene and UE trajectory inputs
+└── source_code/
+    ├── DTPO.py                        # DTPO optimizer and fidelity objective
+    ├── ebstr_calibration_pipeline.py  # Measurement and asset preparation
+    ├── ebstr_bo_calibration.yml       # Example experiment configuration
+    └── run_ebstr_experiment.sh        # One end-to-end candidate evaluation
+```
 
-1. How accurately does a cellular digital twin reproduce real channel and
-   network behavior?
-2. How can uncertain environmental and radio parameters be calibrated when each
-   end-to-end digital-twin evaluation is expensive?
+### `source_code/`
 
-The paper shows that exact instantaneous channel reconstruction is difficult,
-but a calibrated twin can closely reproduce network-level behavior and support
-the transfer of AI models and control policies to the real deployment.
+`DTPO.py` implements the context-aware optimal-transport objective, Sinkhorn
+solver, Sobol initialization, TuRBO search, repeated evaluation, checkpointing,
+and result export. The calibration pipeline prepares EBSTR measurement inputs
+and AODT assets from CSI, KPI, GPX, and scene data. The YAML file defines
+site-specific parameter bounds and optimizer settings, while the shell script
+runs one isolated AODT-to-O-RAN evaluation.
+
+### `data_outdoor/` and `senario/`
+
+`data_outdoor/` contains stationary and mobile CSI snapshots, gNB metrics, GPX
+traces, and the CSI collection script. `senario/` contains the AODT scenario,
+vegetation geometry, waypoints, and UE trajectory inputs used by the project.
 
 ## DTPO Method
 
-DTPO optimizes uncertain material, vegetation, receiver-noise, and RF parameters
-through a closed loop:
+DTPO calibrates material, vegetation, receiver-noise, and RF parameters through
+a closed loop:
 
-1. **Collect real measurements.** Record UE position and time, channel
-   coefficients, and network KPIs including RSRP, UL/DL throughput, CQI, PUSCH
-   SINR, and UL/DL BLER.
-2. **Generate the digital-twin response.** Apply a candidate parameter vector to
-   AODT, generate site-specific CIR/CFR traces, and inject the channel into the
-   O-RAN network stack.
-3. **Measure context-aware fidelity.** Normalize channel and KPI dimensions with
-   robust statistics computed from real measurements, build fixed local
-   measurement groups, and use entropically regularized optimal transport to
-   tolerate spatial and temporal misalignment.
-4. **Update the parameters.** Use Sobol initialization followed by TuRBO with an
-   ARD Matérn-5/2 Gaussian-process surrogate and Thompson sampling. Repeated
-   end-to-end evaluations are averaged before the trust region is updated.
-
-The transport objective jointly evaluates physical-layer channel fidelity and
-network-level KPI fidelity while penalizing spatially or temporally implausible
-matches. Stationary samples are grouped by location; mobile samples are grouped
-into short contiguous trajectory windows.
-
-## Source Code
-
-| Path | Purpose |
-| --- | --- |
-| `source_code/DTPO.py` | Context-aware optimal-transport objective, Sinkhorn solver, Sobol initialization, TuRBO search, repeated evaluation, checkpointing, and result export. |
-| `source_code/ebstr_calibration_pipeline.py` | Prepares EBSTR measurement inputs and AODT calibration assets from CSI, KPI, GPX, and scene data. |
-| `source_code/ebstr_bo_calibration.yml` | Example site-specific parameter bounds, measurement paths, optimizer settings, and evaluation command. |
-| `source_code/run_ebstr_experiment.sh` | Runs one isolated AODT-to-O-RAN evaluation and exports simulated channel/KPI metrics. |
-| `data_outdoor/csi_aodt.py` | Receives, visualizes, and stores outdoor CSI snapshots. |
-| `data_outdoor/` | Outdoor stationary/mobile GPX traces, CSI snapshots, and gNB metric logs used during data collection. |
-
-## Optimization Workflow
+1. Collect real CSI, KPIs, UE positions, and timestamps.
+2. Apply candidate parameters in AODT and inject the generated CIR/CFR into the
+   O-RAN stack.
+3. Score channel and KPI fidelity with context-aware, entropically regularized
+   optimal transport under spatial and temporal constraints.
+4. Update the parameters using Sobol initialization followed by TuRBO, averaging
+   repeated end-to-end evaluations.
 
 ```text
 Real CSI/KPI + position/time
@@ -67,35 +63,52 @@ Real CSI/KPI + position/time
 Fixed normalization and local groups
             │
             ▼
-Sobol / TuRBO proposes normalized parameters
+Sobol / TuRBO proposes parameters
             │
             ▼
-AODT generates site-specific CIR/CFR
+AODT generates CIR/CFR
             │
             ▼
-O-RAN stack produces simulated CSI/KPIs
+O-RAN produces simulated CSI/KPIs
             │
             ▼
-Context-aware Sinkhorn transport objective
+Context-aware transport objective
             │
             └──────────── feedback to TuRBO
 ```
 
-Each evaluation command must write a `simulation_metrics.csv` file containing
-the channel, KPI, position, time, and grouping fields required by
-`source_code/DTPO.py`. The real-measurement CSV provides the fixed normalization
-statistics and reference groups.
+The real-measurement CSV defines fixed normalization statistics and reference
+groups. Each candidate evaluation must write `simulation_metrics.csv` with the
+channel, KPI, position, time, and grouping fields required by `DTPO.py`.
+Stationary samples are grouped by location, while mobile samples use short
+contiguous trajectory windows.
+
+## Requirements
+
+The optimizer requires:
+
+```text
+matplotlib
+numpy
+pandas
+PyYAML
+SciPy
+```
+
+The calibration pipeline additionally requires OmegaConf and the AODT client
+modules referenced by `ebstr_calibration_pipeline.py`. The complete end-to-end
+runner assumes an existing AODT/O-RAN environment and deployment-specific radio
+configurations.
 
 ## Running DTPO
 
-Install the Python dependencies used by the optimizer and data pipeline, then
-run:
+Run the optimizer with the example configuration:
 
 ```bash
 python3 source_code/DTPO.py --config source_code/ebstr_bo_calibration.yml
 ```
 
-Useful options:
+To override the output directory or evaluation budget:
 
 ```bash
 python3 source_code/DTPO.py \
@@ -104,20 +117,17 @@ python3 source_code/DTPO.py \
   --configurations 160
 ```
 
-The optimizer writes iteration histories, repeated-run objectives, convergence
+The optimizer exports iteration histories, repeated-run objectives, convergence
 figures, the best simulated metrics, calibrated assets, and
-`best_parameters.json` to the configured output directory.
-
-The end-to-end experiment runner assumes an existing AODT/O-RAN environment,
-radio configurations, prepared measurement CSVs, and the external modules
-referenced by the YAML and shell scripts. Those deployment-specific components
-are not bundled as a standalone environment in this repository.
+`best_parameters.json` to the configured output directory. Deployment-specific
+AODT/O-RAN components are not bundled as a standalone environment in this
+repository.
 
 ## Project Webpage
 
-The webpage contains the real-world 100 MHz channel measurement demo, the DTPO
-evaluation demo, the system overview, the experimental area, and the measurement
-map. Preview it locally with:
+The webpage presents the real-world 100 MHz and AODT channel measurement demos,
+the DTPO system overview, the experimental area, and the measurement map.
+Preview it locally with:
 
 ```bash
 python3 -m http.server 8000
@@ -126,18 +136,6 @@ python3 -m http.server 8000
 Then open `http://localhost:8000/`, or visit the hosted
 [DTPO project page](https://dtpo-source.github.io/DTPO/).
 
-## Repository Structure
+## Citation
 
-```text
-.
-├── index.html                         # DTPO project webpage
-├── assets/
-│   ├── images/                        # System, deployment, and map figures
-│   └── videos/                        # Browser-compatible project demos
-├── data_outdoor/                      # Outdoor CSI, KPI, and GPX measurements
-└── source_code/
-    ├── DTPO.py                        # DTPO optimizer and fidelity objective
-    ├── ebstr_calibration_pipeline.py  # Measurement/asset preparation
-    ├── ebstr_bo_calibration.yml       # Example experiment configuration
-    └── run_ebstr_experiment.sh        # One end-to-end candidate evaluation
-```
+Citation details will be added upon publication.
