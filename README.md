@@ -51,10 +51,10 @@ into short contiguous trajectory windows.
 
 | Path | Purpose |
 | --- | --- |
-| `source/DTPO.py` | Context-aware optimal-transport objective, Sinkhorn solver, Sobol initialization, TuRBO search, repeated evaluation, checkpointing, and result export. |
-| `source/ebstr_calibration_pipeline.py` | Prepares EBSTR measurement inputs and AODT calibration assets from CSI, KPI, GPX, and scene data. |
-| `source/ebstr_bo_calibration.yml` | Example site-specific parameter bounds, measurement paths, optimizer settings, and evaluation command. |
-| `source/run_ebstr_experiment.sh` | Runs one isolated AODT-to-O-RAN evaluation and exports simulated channel/KPI metrics. |
+| `source_code/DTPO.py` | Context-aware optimal-transport objective, Sinkhorn solver, Sobol initialization, TuRBO search, repeated evaluation, checkpointing, and result export. |
+| `source_code/ebstr_calibration_pipeline.py` | Prepares EBSTR measurement inputs and AODT calibration assets from CSI, KPI, GPX, and scene data. |
+| `source_code/ebstr_bo_calibration.yml` | Example site-specific parameter bounds, measurement paths, optimizer settings, and evaluation command. |
+| `source_code/run_ebstr_experiment.sh` | Runs one isolated AODT-to-O-RAN evaluation and exports simulated channel/KPI metrics. |
 | `data_outdoor/csi_aodt.py` | Receives, visualizes, and stores outdoor CSI snapshots. |
 | `data_outdoor/` | Outdoor stationary/mobile GPX traces, CSI snapshots, and gNB metric logs used during data collection. |
 
@@ -83,7 +83,7 @@ Context-aware Sinkhorn transport objective
 
 Each evaluation command must write a `simulation_metrics.csv` file containing
 the channel, KPI, position, time, and grouping fields required by
-`source/DTPO.py`. The real-measurement CSV provides the fixed normalization
+`source_code/DTPO.py`. The real-measurement CSV provides the fixed normalization
 statistics and reference groups.
 
 ## Running DTPO
@@ -92,14 +92,14 @@ Install the Python dependencies used by the optimizer and data pipeline, then
 run:
 
 ```bash
-python3 source/DTPO.py --config source/ebstr_bo_calibration.yml
+python3 source_code/DTPO.py --config source_code/ebstr_bo_calibration.yml
 ```
 
 Useful options:
 
 ```bash
-python3 source/DTPO.py \
-  --config source/ebstr_bo_calibration.yml \
+python3 source_code/DTPO.py \
+  --config source_code/ebstr_bo_calibration.yml \
   --output-dir data/bo_calibration/EBSTR/20mhz/stationary \
   --configurations 160
 ```
@@ -135,7 +135,7 @@ Then open `http://localhost:8000/`, or visit the hosted
 │   ├── images/                        # System, deployment, and map figures
 │   └── videos/                        # Browser-compatible project demos
 ├── data_outdoor/                      # Outdoor CSI, KPI, and GPX measurements
-└── source/
+└── source_code/
     ├── DTPO.py                        # DTPO optimizer and fidelity objective
     ├── ebstr_calibration_pipeline.py  # Measurement/asset preparation
     ├── ebstr_bo_calibration.yml       # Example experiment configuration
